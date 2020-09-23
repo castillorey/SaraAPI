@@ -1,16 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using SaraAPI.Models;
+using SaraReportAPI.Models;
+using SaraReportAPI.Models.Entities;
 using System;
 using System.Linq;
 using System.Text;
 
-namespace SaraAPI.Controllers {
+namespace SaraReportAPI.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class ModelBaseController: ControllerBase {
         protected IConfiguration Configuration { get; set; }
+        protected SaraReportDBContext dBContext { get; set; }
         private static Random Random { get; set; }
+
+        public ModelBaseController(IConfiguration config,
+                                   SaraReportDBContext dBContext) {
+            Configuration = config;
+            this.dBContext = dBContext;
+            Random = new Random();
+        }
 
         protected ObjectResult BuildResponseObjectResult(SMGenericResponse res, int code = 0) {
             return StatusCode(code != 0 ? code : res.CheckStatus(), res);

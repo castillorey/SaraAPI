@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace SaraAPI.Models {
+namespace SaraReportAPI.Models {
     public class SMGenericResponse {
         public string Status { get; set; }
         public string Message { get; set; }
